@@ -1,23 +1,49 @@
-<div class="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+<app-navbar></app-navbar>
 
-    <div class="flex justify-between items-center mb-4">
 
-        <div class="grid grid-cols-8 gap-4">
+<div class="container mx-auto mt-10 p-6 bg-[#d8f1f7] rounded-lg shadow-lg">
+
+    <div class=" justify-between items-center mb-4 grid grid-cols-8 gap-4">
+
+
+        <div class="mb-4 col-span-2">
+            <label class="block text-gray-600">Busqueda</label>
             <input type="text" [(ngModel)]="SearchText" placeholder="Buscar tarea..."
-                class="col-span-6 px-4 py-2 border rounded-lg w-full focus:outline-none focus:border-blue-500">
-
-
-            <button [disabled]="SearchText =='' || SearchText == null" (click)="getTasks()"
-                class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-                Buscar
-            </button>
-            <button [disabled]="SearchText =='' || SearchText == null" (click)="SearchText=''; getTasks()"
-                class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-                Limpiar
-            </button>
+                class="px-4 py-2 border rounded-lg w-full focus:outline-none focus:border-blue-500">
         </div>
 
-        <button (click)="openModal()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+        <div class="mb-4">
+            <label class="block text-gray-600">Estado</label>
+            <select [(ngModel)]="filterState" class="w-full px-4 py-2 border rounded-lg">
+                <option value="0">Sin Iniciar</option>
+                <option value="1">En Proceso</option>
+                <option value="2">Completada</option>
+                <option value="3">Anulada</option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-600">Fecha Limite</label>
+            <input [(ngModel)]="filterDate" type="date" class="w-full px-4 py-2 border rounded-lg">
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-600">Fecha de compleatdo</label>
+            <input [(ngModel)]="filterFinishDate" type="date" class="w-full px-4 py-2 border rounded-lg">
+        </div>
+
+        <button (click)="getTasks()" [disabled]="getDisableButtons()"
+            class="bg-cyan-500 text-white px-4 py-2 rounded-lg font-bold hover:bg-[#04a3c4] transition-transform duration-200 hover:scale-105">
+            Buscar
+        </button>
+        <button (click)="cleanFilters()" [disabled]="getDisableButtons()"
+            class="bg-cyan-500 text-white px-4 py-2 rounded-lg font-bold hover:bg-[#04a3c4] transition-transform duration-200 hover:scale-105">
+            Limpiar
+        </button>
+
+
+        <button (click)="openModal()"
+            class="bg-cyan-500 text-white px-4 py-2 rounded-lg font-bold hover:bg-[#04a3c4] transition-transform duration-200 hover:scale-105">
             Crear Tarea
         </button>
     </div>
@@ -30,7 +56,7 @@
                 <th class="border border-gray-300 px-4 py-2 text-left">Nombre</th>
                 <th class="border border-gray-300 px-4 py-2 text-left">Descripción</th>
                 <th class="border border-gray-300 px-4 py-2 text-center">Estado</th>
-                <th class="border border-gray-300 px-4 py-2 text-center">Fecha</th>
+                <th class="border border-gray-300 px-4 py-2 text-center">Fecha Limite</th>
                 <th class="border border-gray-300 px-4 py-2 text-center">Acciones</th>
             </tr>
         </thead>
@@ -40,13 +66,15 @@
                 <td class="border border-gray-300 px-4 py-2">{{ task.name }}</td>
                 <td class="border border-gray-300 px-4 py-2">{{ task.description }}</td>
                 <td class="border border-gray-300 px-4 py-2 text-center">
-                    <span class="px-2 py-1 rounded-lg text-sm font-semibold" [ngClass]="getStatusClass(task.status)">
+                    <span class="inline-flex px-2 py-1 rounded-lg text-sm font-semibold"
+                        [ngClass]="getStatusClass(task.status)">
                         {{ getStatusText(task.status) }}
                     </span>
                 </td>
                 <td class="border border-gray-300 px-4 py-2 text-center">{{ task.date | date: 'dd/MM/yyyy' }}</td>
                 <td class="border border-gray-300 px-4 py-2 text-center">
-                    <button (click)="openModal(task)" class="text-blue-500 hover:underline">Editar</button>
+                    <button (click)="openModal(task)" class="text-cyan-500 hover:underline">Editar</button> /
+                    <button (click)="showDeleteAlert(task.id)" class="text-red-500 hover:underline">Eliminar</button>
                 </td>
             </tr>
         </tbody>
@@ -55,14 +83,14 @@
     <!-- paginate -->
     <div class="flex justify-between items-center mt-4">
         <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1"
-            class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-50">
+            class="px-4 py-2 bg-gray-300 rounded font-bold hover:bg-gray-400 disabled:opacity-50 transition-transform duration-200 hover:scale-105">
             Anterior
         </button>
 
         <span class="text-gray-700">Página {{ currentPage }} de {{ lastPage }}</span>
 
         <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === lastPage"
-            class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-50">
+            class="px-4 py-2 bg-gray-300 rounded font-bold hover:bg-gray-400 disabled:opacity-50 transition-transform duration-200 hover:scale-105">
             Siguiente
         </button>
     </div>

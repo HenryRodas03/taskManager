@@ -50,20 +50,10 @@ export class LoginComponent {
               'userName',
               data['data']['information_user']['user_name']
             );
+            this.router.navigate(['/tasks']);
           }
         },
       });
-
-      /* const { email, password } = this.loginForm.value;
-
-      // Simulación de autenticación (luego conectaremos con Laravel)
-      if (email === 'admin@example.com' && password === '123456') {
-        alert('Inicio de sesión exitoso');
-        localStorage.setItem('token', 'fake-jwt-token'); // Guardar token simulado
-        this.router.navigate(['/dashboard']); // Redirigir al Dashboard
-      } else {
-        alert('Credenciales incorrectas');
-      } */
     }
   }
 

@@ -19,16 +19,6 @@ export class TaskListService {
       'Authorization': this.token ?? '',
     });
   }
-  
-  
-  formatParams(data: any){  
-    let params = new HttpParams();
-    for (const key in data) {
-      if (data.hasOwnProperty(key)) {
-        params = params.set(key, data[key]);
-      }
-    }
-  }
 
   getTasks(data: any) {
     return this.http.get(`${this.API_URL}/listAllTasks`, { headers:this._getHeaders(), params:data });
@@ -36,6 +26,10 @@ export class TaskListService {
 
   saveOrUpdateTask(data: any){
     return this.http.post(`${this.API_URL}/saveOrUpdateTask`,data, { headers:this._getHeaders() });
+  }
+
+  deleteTask(data: any){
+    return this.http.post(`${this.API_URL}/deleteTask`,data, { headers:this._getHeaders() });
   }
 
 }
