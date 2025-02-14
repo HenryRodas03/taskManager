@@ -7,8 +7,8 @@ Estas son las tecnologias que debe tener ya instaladas y configuradas en su comp
 
 | Tecnologia | Version | 
 | ---------- | ----- |
-| Node.js  | = v22.13.1 |
-| Angular CLI | v18.2.14 |
+| Node.js  | v22.13.1 |
+| Angular CLI | >= v18.2.11 |
 | NPM | v10.9.2 |
 
 
