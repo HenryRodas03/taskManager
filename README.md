@@ -1,27 +1,39 @@
-# TaskManagerAngular
+<h1 style="color: #007acc;">📌 TaskManager Angular</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.11.
+Este proyecto fue creado con la version 18.2.11 de [Angular CLI](https://github.com/angular/angular-cli) .
 
-## Development server
+## 🚀 Instalación y ejecución
+Para ejecutar el proyecto, primero hay que clonarlo con el comando `git clone`. Luego, se abre en el editor de código de preferencia y, desde una terminal dentro del proyecto, se ejecuta el siguiente comando:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```
+npm install
+```
+Hay que esperar a que se complete la instalación de los node_modules. Una vez finalizada, se puede iniciar la aplicación con:
 
-## Code scaffolding
+```
+ng serve --open
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Lo que abrirá automáticamente el navegador y permitirá usarla.
 
-## Build
+## 📦 Librerías utilizadas
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+| Librería | Version | 
+| ---------- | ----- |
+| sweetalert2 | >= v11.16.0 |
+| tailwindcss | >= v3.4.17 |
 
-## Running unit tests
+## 📂 Estructura del proyecto
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+📦 task-manager  
+ ┣ 📂 src  
+ ┃ ┣ 📂 app  
+ ┃ ┃ ┣ 📂 components  
+ ┃ ┃ ┣ 📂 guards  
+ ┃ ┃ ┣ 📂 services  
+ ┃ ┃ ┣ 📂 login  
+ ┃ ┃ ┣ 📂 task-list  
+ ┃ ┃ ┗ 📜 app.config.ts  
+ ┃ ┣ 📜 index.html  
+ ┃ ┣ 📜 styles.css  
+ ┗ 📜 angular.json
