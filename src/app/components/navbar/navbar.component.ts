@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavBarService } from './services/nav-bar.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,12 +11,21 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
 
-  constructor(private router: Router) {}
+  userId = localStorage.getItem('userId');
+
+  constructor(private router: Router, private navBarService: NavBarService) {}
 
   logout() {
-    console.log('deslogueo');
-    
-    localStorage.clear();
-    this.router.navigate(['/login']);
+    let user = {
+      id: this.userId
+    };
+    this.navBarService.logOut(user).subscribe({
+      next: (data:any) => {
+        if (data['status']) {
+          localStorage.clear();
+          this.router.navigate(['/login']);
+        }
+      }
+    })
   }
 }
